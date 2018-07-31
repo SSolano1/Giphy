@@ -25,7 +25,7 @@ $(document).ready(function () {
     $("#add-team").on("click", function (event) {
         event.preventDefault();
         var userEntry = $("#textarea").val().trim();
-
+        $("#textarea").val('');
         //   puts button on the page
         team.push(userEntry);
         // console.log(userEntry);
@@ -49,20 +49,21 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             var results = response.data;
+            $(".image-wrapper").empty();
 
             //Loop for result    
             for (var i = 0; i < results.length; i++) {
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                    // console.log(results[i]);
+                    console.log(results);
                     var gif = $(".image-wrapper");
                     var rating = results[i].rating;
                     var p = $("<p>").text("Rating: " + rating);
                     var image = $("<img>");
-                    image.addClass("still");
-                    image.attr("data-state", "paused");
+                    image.addClass("gifImg");
+                    image.attr("data-state", "still");
                     image.attr("src", results[i].images.fixed_width_still.url);
-                    image.attr("data-pause", results[i].images.fixed_width_still.url);
-                    image.attr("data-moving", results[i].images.fixed_width_still.url);
+                    image.attr("data-still", results[i].images.fixed_width_still.url);
+                    image.attr("data-animate", results[i].images.fixed_height.url);
 
                     //appends the image and rating
                     gif.append(p);
@@ -71,18 +72,18 @@ $(document).ready(function () {
                 }
             }
             // start and stop gifs
-            $(document).on("click", ".still", function () {
-
+            $(document).on("click", ".gifImg", function () {
+                // alert("hello");
                 // create variable
-                var move = $(".still").attr("data-state");
+                var move = $(this).attr("data-state");
 
                 // if statement that will start and stop animation
-                if (move === "paused") {
-                    $(this).attr("src", $(this).attr("data-moving"));
-                    $(this).attr("data-state", "moving");
+                if (move === "animate") {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
                 } else {
-                    $(this).attr("src", $(this).attr("data-paused"));
-                    $(this).attr("data-state", "paused");
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
                 }
 
             });
