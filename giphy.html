@@ -3,31 +3,36 @@
 
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Title  -->
   <title>Favorite NFL Team</title>
-  <style type="text/css">
-    button,
-    div,
-    form,
-    input {
-      margin: 10px;
-    }
-  </style>
+
+<!-- link to CSS and Bootsrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+
 </head>
 
 <body>
 
   <div class="container">
-    <h1>Team Search</h1>
+    <h1>NFL Team Search</h1>
 
     <div id="team-view"></div>
     <!-- Buttons -->
     <div id="buttons-view"></div>
+    <div class="userinput">
+        <input class="form-control" id="textarea" type="text" placeholder="Search">
+        <br>
+        <a id="input" class="btn btn-primary">
+    </div>
 
     <form id="team-form">
-      <label for="team-input">Add a NFL team</label>
-      <input type="text" id="team-input"><br>
-
-      <!-- Button adds new team -->
+           <!-- Button adds new team -->
       <input id="add-team" type="submit" value="Add a NFL Team">
     </form>
 
@@ -35,55 +40,9 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
     </script>
+   <script src="assets/javascript/main.js"></script>
    
-    <script type="text/javascript">
-      // array of NFL team
-      var team = ["Miami Dolphins", "New York Giants", "Philadelphia Eages", "New England Patriots"];
-
-      // captures the team name from the data-attribute
-      function displayalertTeamName() {
-        var teamName = $(this).attr("data-name");
-
-        alert(teamName);
-      }
-
-      // Function for displaying movie data
-      function renderButtons() {
-
-    //   need to empty the buttons
-        $("#buttons-view").empty();
-
-        // Loop through the array of teams
-        for (var i = 0; i < team.length; i++) {
-
-          // Then dynamicaly adds buttons for each movie in the array
-          var a = $("<button>");
-          a.addClass("team");
-          a.attr("data-name", team[i]);
-          a.text(team[i]);
-          $("#buttons-view").append(a);
-        }
-      }
-
-        $("#add-team").on("click", function(event) {
-        // Preventing the buttons default behavior when clicked (which is submitting a form)
-        event.preventDefault();
-
-        // grabs the input from the textbox
-        var team = $("#team-input").val().trim();
-
-        // Adds movie to the array
-        team.push(team);
-        renderButtons();
-
-      });
-
-      $(document).on("click", ".team", teamName);
-
-      // Calling the renderButtons function to display the intial buttons
-      renderButtons();
-    </script>
-  </div>
+  
 </body>
 
 </html>
